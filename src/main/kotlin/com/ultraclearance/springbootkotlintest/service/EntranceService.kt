@@ -3,8 +3,8 @@ package com.ultraclearance.springbootkotlintest.service
 import com.ultraclearance.springbootkotlintest.service.type.Person
 
 class EntranceService(
-        val counterService: CounterService,
-        val greeterService: GreeterService
+        private val counterService: CounterService,
+        private val greeterService: GreeterService
 ) {
     val people = mutableListOf<Person>()
 

@@ -1,7 +1,9 @@
 package com.ultraclearance.springbootkotlintest.service
 
 import com.ultraclearance.springbootkotlintest.service.type.Person
+import org.springframework.stereotype.Component
 
+@Component
 class EntranceService(
         private val counterService: CounterService,
         private val greeterService: GreeterService

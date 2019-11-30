@@ -6,7 +6,9 @@ import io.kotlintest.TestCase
 import io.kotlintest.TestResult
 import io.kotlintest.specs.BehaviorSpec
 import io.mockk.*
+import org.springframework.stereotype.Component
 
+@Component
 class EntranceServiceTest : BehaviorSpec() {
 
     private val counterService: CounterService = mockk()

@@ -2,7 +2,6 @@ package com.ultraclearance.springbootkotlintest.service
 
 import com.ultraclearance.springbootkotlintest.SpringBootKotlintestApplication
 import com.ultraclearance.springbootkotlintest.service.type.Person
-import io.kotlintest.Spec
 import io.kotlintest.TestCase
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.BehaviorSpec
@@ -26,16 +25,10 @@ class EntranceServiceWithAutowireTest : BehaviorSpec() {
     override fun beforeTest(testCase: TestCase) {
         super.beforeTest(testCase)
 
-        // Autowired values does not exist before spec
-        entranceService = EntranceService(counterService, greeterService)
-    }
-
-    override fun afterSpec(spec: Spec) {
-        super.afterSpec(spec)
-
-        // Normally we would simply instantiate new objects of these classes, instead of autowiring and manually resetting them
-        // because neither CounterService or GreeterService are dependent on the Spring context
-        reset()
+        if (testCase.isTopLevel()) {
+            entranceService = EntranceService(counterService, greeterService)
+            reset()
+        }
     }
 
     fun reset() {

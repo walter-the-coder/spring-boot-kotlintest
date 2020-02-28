@@ -1,9 +1,7 @@
 package com.ultraclearance.springbootkotlintest.service
 
 import com.ultraclearance.springbootkotlintest.service.type.Person
-import io.kotlintest.Spec
 import io.kotlintest.TestCase
-import io.kotlintest.TestResult
 import io.kotlintest.specs.BehaviorSpec
 import io.mockk.*
 
@@ -13,15 +11,13 @@ class EntranceServiceTest : BehaviorSpec() {
     private val greeterService: GreeterService = mockk()
     private var entranceService = EntranceService(counterService, greeterService)
 
-    override fun beforeSpec(spec: Spec) {
-        super.beforeSpec(spec)
-        setupMockks()
-    }
+    override fun beforeTest(testCase: TestCase) {
+        super.beforeTest(testCase)
 
-    override fun afterTest(testCase: TestCase, result: TestResult) {
-        super.afterTest(testCase, result)
-        clearAllMocks()
-        setupMockks()
+        if (testCase.isTopLevel()) {
+            clearAllMocks()
+            setupMockks()
+        }
     }
 
     fun setupMockks() {
